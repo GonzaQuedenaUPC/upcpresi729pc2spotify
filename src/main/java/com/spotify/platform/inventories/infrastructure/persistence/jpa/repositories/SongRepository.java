@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SongRepository extends JpaRepository<Song, Long> {
 
-    boolean existsByName(String name);
+    boolean existsByNameAndSingerAndGroupNameAndRhythmId(String name, String singer, String group, Rhythm rhythm);
 }
