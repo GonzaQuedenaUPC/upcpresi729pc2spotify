@@ -11,7 +11,7 @@ public class SongResourceFromEntityAssembler {
                 entity.getName(),
                 entity.getSinger(),
                 entity.getGroupName(),
-                entity.getRhythmId().getId(),
+                entity.geRhythmId(),
                 entity.getYear().toString()
         );
     }
