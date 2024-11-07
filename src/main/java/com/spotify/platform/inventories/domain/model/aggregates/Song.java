@@ -55,7 +55,7 @@ public class Song extends AuditableAbstractAggregateRoot<Song> {
         }
     }
 
-    public Long getGroupId() {
+    public Long geRhythmId() {
         return rhythmId.getId();
     }
 }
