@@ -1,7 +1,7 @@
 package com.spotify.platform.inventories.domain.services;
 
-import com.spotify.platform.inventories.domain.model.commands.SeedSongsCommand;
+import com.spotify.platform.inventories.domain.model.commands.SeedRhythmsCommand;
 
 public interface RhythmCommandService {
-    void handle (SeedSongsCommand command);
+    void handle (SeedRhythmsCommand command);
 }

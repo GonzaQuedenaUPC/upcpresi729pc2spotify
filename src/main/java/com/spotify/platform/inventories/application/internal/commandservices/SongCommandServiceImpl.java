@@ -23,12 +23,12 @@ public class SongCommandServiceImpl implements SongCommandService {
     @Override
     public Optional<Song> handle(CreateSongCommand command) {
 
-        Rhythm rhythm = rhythmRepository.findById(command.rhythmId()).orElseThrow(() ->
-                new IllegalArgumentException("Rhythm not found"));
-
-        if (songRepository.existsByNameAndSingerAndGroupAndRhythm(command.name(), command.singer(), command.group(), rhythm)) {
+        if (songRepository.existsByName(command.name())) {
             throw new IllegalArgumentException("Song already exists");
         }
+
+        Rhythm rhythm = rhythmRepository.findById(command.rhythmId())
+                .orElseThrow(() -> new IllegalArgumentException("Rhythm not found"));
 
         Song song = new Song(command, rhythm);
 

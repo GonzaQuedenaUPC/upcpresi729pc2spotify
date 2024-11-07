@@ -26,12 +26,12 @@ public class Rhythm {
         this.name = name;
     }
 
-    public static Rhythm getDefaultRhythm() {
-        return new Rhythm(Rhythms.SALSA);
-    }
-
     public String getStringName() {
         return name.toString();
+    }
+
+    public static Rhythm getDefaultRhythm() {
+        return new Rhythm(Rhythms.SALSA);
     }
 
     public static Rhythm toRhythmFromName(String name) {

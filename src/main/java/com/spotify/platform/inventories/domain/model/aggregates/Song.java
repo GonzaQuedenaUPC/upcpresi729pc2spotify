@@ -9,6 +9,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Getter
@@ -18,24 +20,23 @@ public class Song extends AuditableAbstractAggregateRoot<Song> {
     @NotBlank
     @Size(max = 50)
     @Column(unique = true, nullable = false)
-    private String name;
+    String name;
 
     @NotBlank
     @Size(max = 80)
-    private String singer;
+    String singer;
 
     @NotBlank
     @Size(max = 100)
-    private String group;
+    String groupName;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name="rhythm_id", nullable = false)
     Rhythm rhythmId;
 
-    @NotNull
     @Temporal(TemporalType.DATE)
-    private Date year;
+    Date year;
 
     public Song() {
     }
@@ -43,9 +44,15 @@ public class Song extends AuditableAbstractAggregateRoot<Song> {
     public Song(CreateSongCommand command, Rhythm rhythm) {
         this.name = command.name();
         this.singer = command.singer();
-        this.group = command.group();
+        this.groupName = command.group();
         this.rhythmId = rhythm;
-        this.year = command.year();
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+            this.year = dateFormat.parse(command.year());
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Invalid year format: the year must be in 'yyyy' format", e);
+        }
     }
 
     public Long getGroupId() {
